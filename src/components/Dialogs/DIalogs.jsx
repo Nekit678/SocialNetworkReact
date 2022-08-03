@@ -17,7 +17,7 @@ function Message(props) {
 
 function Dialogs(props) {
 
-    let data = [
+    let dataDialog = [
         { id: 1, name: "Nikita" },
         { id: 2, name: "Milena" },
         { id: 3, name: "Homyak" },
@@ -28,24 +28,18 @@ function Dialogs(props) {
         { id: 1, message: "Hi" },
         { id: 2, message: "How are you?" },
         { id: 3, message: "Lol kekw" },
-        { id: 4, message: "Kavagangaa" }]
+        { id: 4, message: "Kavabangaa" }]
+
+    let dialogelem = dataDialog.map(dialog => <Dialog name={dialog.name} id={dialog.id}></Dialog>)
+    let meselem = dataMes.map(mes => <Message message={mes.message}></Message>)
 
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
-                <Dialog name={data[0].name} id={data[0].id}></Dialog>
-                <Dialog name={data[1].name} id={data[1].id}></Dialog>
-                <Dialog name="Milena" id="2"></Dialog>
-                <Dialog name="Homyak" id="3"></Dialog>
-                <Dialog name="Busya" id="4"></Dialog>
-                <Dialog name="Danya" id="5"></Dialog>
+                {dialogelem}
             </div>
             <div className={s.messages}>
-                <Message message={dataMes[0].message}></Message>
-                <Message message={dataMes[1].message}></Message>
-                <Message message={dataMes[2].message}></Message>
-                <Message message="How are you?"></Message>
-                <Message message="Lol kekw"></Message>
+                {meselem}
             </div>
         </div>
     );
