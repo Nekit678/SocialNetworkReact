@@ -9,8 +9,8 @@ function MyPosts() {
         new post
       </div>
       <div className={s.posts}>
-        <Post></Post>
-        <Post></Post>
+        <Post message="Hi, how are you?"></Post>
+        <Post message="It is my first post!"></Post>
         <Post></Post>
         <Post></Post>
       </div>

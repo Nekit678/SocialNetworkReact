@@ -1,14 +1,13 @@
 import s from './Post.module.css'
 
-function Post() {
+function Post(props) {
   return (
     <div className={s.item}>
       <img src='https://android-obzor.com/wp-content/uploads/2022/02/5-1.jpg'></img>
-      post1
+      {props.message}
       <div>
         <span>Like</span>
       </div>
-
     </div>
   );
 }
