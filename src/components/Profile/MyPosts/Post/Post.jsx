@@ -6,7 +6,8 @@ function Post(props) {
       <img src='https://android-obzor.com/wp-content/uploads/2022/02/5-1.jpg'></img>
       {props.message}
       <div>
-        <span>Like</span>
+        <span>Like {props.likesCount}</span>
+        
       </div>
     </div>
   );
