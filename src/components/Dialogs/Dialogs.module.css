@@ -9,10 +9,14 @@
 
 .dialog {
     padding: 10px;
+    color: white;
+    text-decoration: none;
 }
 
-.dialog.active{
+.active{
     color: gold;
+    text-decoration: none;
+    padding: 10px;
 }
 
 .messages {

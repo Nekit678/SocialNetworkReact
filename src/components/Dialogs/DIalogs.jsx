@@ -1,23 +1,24 @@
 import s from "./Dialogs.module.css"
+import { NavLink } from "react-router-dom"
 
 function Dialogs(props) {
     return (
         <div className={s.dialogs}>
-            <div className={s.dialogsItems}>
+            <div className={s.dialogsdialogs}>
                 <div className={s.dialog}>
-                    Nikita
-                </div>
-                <div className={s.dialog + ' ' + s.active}>
-                    Milena
+                <NavLink to='/dialogs/1' className={navData => navData.isActive ? s.active : s.dialog}>Nikita</NavLink>
                 </div>
                 <div className={s.dialog}>
-                    Homyak
+                <NavLink to='/dialogs/2' className={navData => navData.isActive ? s.active : s.dialog}>Milena</NavLink>
                 </div>
                 <div className={s.dialog}>
-                    Busya
+                <NavLink to='/dialogs/3' className={navData => navData.isActive ? s.active : s.dialog}>Homyak</NavLink>
                 </div>
                 <div className={s.dialog}>
-                    Danya
+                <NavLink to='/dialogs/4' className={navData => navData.isActive ? s.active : s.dialog}>Busya</NavLink>
+                </div>
+                <div className={s.dialog}>
+                <NavLink to='/dialogs/5' className={navData => navData.isActive ? s.active : s.dialog}>Danya</NavLink>
                 </div>
             </div>
             <div className={s.messages}>
