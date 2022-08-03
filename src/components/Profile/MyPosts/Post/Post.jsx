@@ -1,0 +1,16 @@
+import s from './Post.module.css'
+
+function Post() {
+  return (
+    <div className={s.item}>
+      <img src='https://android-obzor.com/wp-content/uploads/2022/02/5-1.jpg'></img>
+      post1
+      <div>
+        <span>Like</span>
+      </div>
+
+    </div>
+  );
+}
+
+export default Post;
