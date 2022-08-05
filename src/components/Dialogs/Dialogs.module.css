@@ -27,3 +27,14 @@
 .message {
     padding: 10px;
 }
+
+.dialog img{
+    width: 30px;
+    height: 30px;
+    border-radius: 20px;
+}
+
+.active img{
+    width: 50px;
+    height: 50px;
+}
