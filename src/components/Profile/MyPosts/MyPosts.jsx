@@ -10,7 +10,6 @@ function MyPosts(props) {
   function addPost(){
     let text = newPostElement.current.value;
     props.addPost(text)
-    alert(text)
   }
 
   return (

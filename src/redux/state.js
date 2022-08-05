@@ -1,3 +1,5 @@
+import { rerenderUI } from "../render";
+
 let state = {
     profilePage: {
         dataPosts: [{ id: 1, message: "Hi, how are you?", likesCount: 12 },
@@ -25,6 +27,7 @@ export function addPost(postMessage) {
     };
 
     state.profilePage.dataPosts.push(newPost);
+    rerenderUI(state)
 }
 
 export default state;
