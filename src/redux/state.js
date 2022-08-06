@@ -3,7 +3,8 @@ import { rerenderUI } from "../render";
 let state = {
     profilePage: {
         dataPosts: [{ id: 1, message: "Hi, how are you?", likesCount: 12 },
-        { id: 2, message: "It is my first post!", likesCount: 28 }]
+        { id: 2, message: "It is my first post!", likesCount: 28 }],
+        textFieldPost: ""
     },
     dialogsPage: {
         dataDialogs: [{ id: 1, name: "Nikita", img: "https://i.pinimg.com/236x/2c/60/cb/2c60cb34a209daa60ee0b6c53cd35688.jpg" },
@@ -15,18 +16,30 @@ let state = {
         { id: 2, message: "How are you?" },
         { id: 3, message: "Lol kekw" },
         { id: 4, message: "Kavabangaa" }],
+        textFieldMessage: ""
     }
 
 }
 
-export function addPost(postMessage) {
+export function addPost() {
     let newPost = {
         id: 5,
-        message: postMessage,
+        message: state.profilePage.textFieldPost,
         likesCount: 0
     };
 
     state.profilePage.dataPosts.push(newPost);
+    state.profilePage.textFieldPost = ""
+    rerenderUI(state)
+}
+
+export function updateTextFieldPost(textField) {
+    state.profilePage.textFieldPost = textField;
+    rerenderUI(state)
+}
+
+export function updateTextFieldMessage(textField) {
+    state.dialogsPage.textFieldMessage = textField;
     rerenderUI(state)
 }
 

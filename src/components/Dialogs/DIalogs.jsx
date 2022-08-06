@@ -4,12 +4,16 @@ import Message from "./Message/Message"
 import React from "react"
 
 let newMessageElement = React.createRef()
-function sendMessage(){
+function sendMessage() {
     alert(newMessageElement.current.value)
 }
 
 function Dialogs(props) {
-        
+    
+    function updateField() {
+        props.updateTextFieldMessage(newMessageElement.current.value)
+    }
+
     let dialogelem = props.state.dataDialogs.map(dialog => <Dialog name={dialog.name} id={dialog.id} img={dialog.img}></Dialog>)
     let meselem = props.state.dataMessages.map(mes => <Message message={mes.message}></Message>)
 
@@ -21,7 +25,7 @@ function Dialogs(props) {
             <div className={s.messages}>
                 {meselem}
                 <p></p>
-                <textarea ref={newMessageElement}/>
+                <textarea onChange={updateField} value={props.state.textFieldMessage} ref={newMessageElement} />
                 <p></p>
                 <button onClick={sendMessage}>Send message</button>
             </div>

@@ -1,15 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
-import { addPost } from './redux/state';
+import { addPost, updateTextFieldMessage, updateTextFieldPost } from './redux/state';
 import App from './App';
 
+const root = ReactDOM.createRoot(document.getElementById('root'));
+
 export function rerenderUI(state){
-    const root = ReactDOM.createRoot(document.getElementById('root'));
+    
   root.render(
     <React.StrictMode>
       <BrowserRouter>
-        <App state={state} addPost = {addPost} />
+        <App state={state} addPost = {addPost} updateTextFieldMessage = {updateTextFieldMessage} updateTextFieldPost = {updateTextFieldPost}/>
       </BrowserRouter>
     </React.StrictMode>
   );
