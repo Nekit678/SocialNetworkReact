@@ -1,4 +1,4 @@
-import { rerenderUI } from "../render";
+
 
 let state = {
     profilePage: {
@@ -19,6 +19,15 @@ let state = {
         textFieldMessage: ""
     }
 
+}
+
+
+let rerenderUI = function() {
+    alert()
+}
+
+export function subscribe(observer){
+    rerenderUI = observer
 }
 
 export function addPost() {
