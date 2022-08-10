@@ -1,4 +1,3 @@
-import { BrowserRouter } from 'react-router-dom';
 import './App.css';
 import Dialogs from './components/Dialogs/DIalogs';
 import Header from './components/Header/Header';
@@ -16,8 +15,8 @@ function App(props) {
       <Navbar></Navbar>
       <div className="app-wrapper-content">
         <Routes>
-          <Route path='/profile' element={<Profile state={props.state.profilePage} addPost = {props.addPost} updateTextFieldPost = {props.updateTextFieldPost}/>} />
-          <Route path='/dialogs/*' element={<Dialogs state={props.state.dialogsPage} updateTextFieldMessage = {props.updateTextFieldMessage}/>} />
+          <Route path='/profile' element={<Profile state={props.state.profilePage} dispatch = {props.dispatch}/>} />
+          <Route path='/dialogs/*' element={<Dialogs state={props.state.dialogsPage} dispatch = {props.dispatch}/>} />
           <Route path='/news' element={<News />} />
           <Route path='/music' element={<Music />} />
           <Route path='/settings' element={<Settings />} />

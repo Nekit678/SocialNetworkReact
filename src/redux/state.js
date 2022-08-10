@@ -25,29 +25,34 @@ let store = {
     _rerenderUI() {
         alert()
     },
-    addPost() {
-        let newPost = {
-            id: 5,
-            message: this._state.profilePage.textFieldPost,
-            likesCount: 0
-        };
-
-        this._state.profilePage.dataPosts.push(newPost);
-        this._state.profilePage.textFieldPost = ""
-        this._rerenderUI(this._state)
-    },
-    updateTextFieldPost(textField) {
-        this._state.profilePage.textFieldPost = textField;
-        this._rerenderUI(this._state)
-    },
-    updateTextFieldMessage(textField) {
-        this._state.dialogsPage.textFieldMessage = textField;
-        this._rerenderUI(this._state)
-    },
     subscribe(observer) {
         this._rerenderUI = observer
+    },
+    dispatch(action)
+    {
+        if (action.type==="ADD-POST")
+        {
+            let newPost = {
+                id: 5,
+                message: this._state.profilePage.textFieldPost,
+                likesCount: 0
+            };
+    
+            this._state.profilePage.dataPosts.push(newPost);
+            this._state.profilePage.textFieldPost = ""
+            this._rerenderUI(this._state)
+        }
+        else if (action.type==="UPDATE-TEXT-FIELD-POST")
+        {
+            this._state.profilePage.textFieldPost = action.textField;
+            this._rerenderUI(this._state)
+        }
+        else if (action.type==="UPDATE-TEXT-FIELD-MESSAGE")
+        {
+            this._state.dialogsPage.textFieldMessage = action.textField;
+            this._rerenderUI(this._state)
+        }
     }
-
 }
 
 export default store;

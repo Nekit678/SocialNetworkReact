@@ -11,7 +11,7 @@ function sendMessage() {
 function Dialogs(props) {
     
     function updateField() {
-        props.updateTextFieldMessage(newMessageElement.current.value)
+        props.dispatch({type: "UPDATE-TEXT-FIELD-MESSAGE", textField:newMessageElement.current.value})
     }
 
     let dialogelem = props.state.dataDialogs.map(dialog => <Dialog name={dialog.name} id={dialog.id} img={dialog.img}></Dialog>)

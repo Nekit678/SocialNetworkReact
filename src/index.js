@@ -14,7 +14,7 @@ export function rerenderUI(state){
 
     <React.StrictMode>
       <BrowserRouter>
-        <App state={state} addPost = {store.addPost.bind(store)} updateTextFieldMessage = {store.updateTextFieldMessage.bind(store)} updateTextFieldPost = {store.updateTextFieldPost.bind(store)}/>
+        <App state={state} dispatch = {store.dispatch.bind(store)}/>
       </BrowserRouter>
     </React.StrictMode>
   );
