@@ -1,3 +1,7 @@
+let ADD_POST = "ADD-POST"
+let UPDATE_TEXT_FIELD_POST = "UPDATE-TEXT-FIELD-POST"
+let UPDATE_TEXT_FIELD_MESSAGE = "UPDATE-TEXT-FIELD-MESSAGE"
+
 let store = {
     _state: {
         profilePage: {
@@ -19,7 +23,7 @@ let store = {
         }
 
     },
-    getState(){
+    getState() {
         return this._state;
     },
     _rerenderUI() {
@@ -28,30 +32,48 @@ let store = {
     subscribe(observer) {
         this._rerenderUI = observer
     },
-    dispatch(action)
-    {
-        if (action.type==="ADD-POST")
-        {
+    dispatch(action) {
+        if (action.type === "ADD-POST") {
             let newPost = {
                 id: 5,
                 message: this._state.profilePage.textFieldPost,
                 likesCount: 0
             };
-    
+
             this._state.profilePage.dataPosts.push(newPost);
             this._state.profilePage.textFieldPost = ""
             this._rerenderUI(this._state)
         }
-        else if (action.type==="UPDATE-TEXT-FIELD-POST")
-        {
+        else if (action.type === "UPDATE-TEXT-FIELD-POST") {
             this._state.profilePage.textFieldPost = action.textField;
             this._rerenderUI(this._state)
         }
-        else if (action.type==="UPDATE-TEXT-FIELD-MESSAGE")
-        {
+        else if (action.type === "UPDATE-TEXT-FIELD-MESSAGE") {
             this._state.dialogsPage.textFieldMessage = action.textField;
             this._rerenderUI(this._state)
         }
+    }
+}
+
+
+export function addPostAC() {
+    return {
+        type: ADD_POST
+    }
+}
+
+
+export function updatePostTextAC(text) {
+    return {
+        type: UPDATE_TEXT_FIELD_POST,
+        textField: text
+    }
+}
+
+export function updateMessageTextAC(text) {
+    return {
+        type: UPDATE_TEXT_FIELD_MESSAGE,
+        textField: text
     }
 }
 

@@ -2,6 +2,7 @@ import s from "./Dialogs.module.css"
 import Dialog from "./DIalog/Dialog"
 import Message from "./Message/Message"
 import React from "react"
+import { updateMessageTextAC } from "../../redux/state"
 
 let newMessageElement = React.createRef()
 function sendMessage() {
@@ -11,7 +12,7 @@ function sendMessage() {
 function Dialogs(props) {
     
     function updateField() {
-        props.dispatch({type: "UPDATE-TEXT-FIELD-MESSAGE", textField:newMessageElement.current.value})
+        props.dispatch(updateMessageTextAC())
     }
 
     let dialogelem = props.state.dataDialogs.map(dialog => <Dialog name={dialog.name} id={dialog.id} img={dialog.img}></Dialog>)

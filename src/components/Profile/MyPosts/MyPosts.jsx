@@ -1,6 +1,7 @@
 import s from './MyPosts.module.css'
 import Post from './Post/Post';
 import React from 'react';
+import { addPostAC, updatePostTextAC } from '../../../redux/state';
 
 function MyPosts(props) {
 
@@ -9,11 +10,11 @@ function MyPosts(props) {
   let newPostElement = React.createRef();
 
   function addPost() {
-    props.dispatch({type:"ADD-POST"})
+    props.dispatch(addPostAC())
   }
 
   function updateField() {
-    props.dispatch({type: "UPDATE-TEXT-FIELD-POST", textField: newPostElement.current.value})
+    props.dispatch(updatePostTextAC())
   }
 
   return (
