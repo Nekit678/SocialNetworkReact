@@ -1,6 +1,5 @@
-let ADD_POST = "ADD-POST"
-let UPDATE_TEXT_FIELD_POST = "UPDATE-TEXT-FIELD-POST"
-let UPDATE_TEXT_FIELD_MESSAGE = "UPDATE-TEXT-FIELD-MESSAGE"
+import dialogsReducer from "./dialogs-reducer"
+import profileReducer from "./profile-reducer"
 
 let store = {
     _state: {
@@ -33,48 +32,11 @@ let store = {
         this._rerenderUI = observer
     },
     dispatch(action) {
-        if (action.type === "ADD-POST") {
-            let newPost = {
-                id: 5,
-                message: this._state.profilePage.textFieldPost,
-                likesCount: 0
-            };
-
-            this._state.profilePage.dataPosts.push(newPost);
-            this._state.profilePage.textFieldPost = ""
-            this._rerenderUI(this._state)
-        }
-        else if (action.type === "UPDATE-TEXT-FIELD-POST") {
-            this._state.profilePage.textFieldPost = action.textField;
-            this._rerenderUI(this._state)
-        }
-        else if (action.type === "UPDATE-TEXT-FIELD-MESSAGE") {
-            this._state.dialogsPage.textFieldMessage = action.textField;
-            this._rerenderUI(this._state)
-        }
+        this._state.profilePage = profileReducer(this._state.profilePage,action)
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage,action)
+        this._rerenderUI(this._state)
     }
 }
 
-
-export function addPostAC() {
-    return {
-        type: ADD_POST
-    }
-}
-
-
-export function updatePostTextAC(text) {
-    return {
-        type: UPDATE_TEXT_FIELD_POST,
-        textField: text
-    }
-}
-
-export function updateMessageTextAC(text) {
-    return {
-        type: UPDATE_TEXT_FIELD_MESSAGE,
-        textField: text
-    }
-}
 
 export default store;

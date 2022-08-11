@@ -2,17 +2,19 @@ import s from "./Dialogs.module.css"
 import Dialog from "./DIalog/Dialog"
 import Message from "./Message/Message"
 import React from "react"
-import { updateMessageTextAC } from "../../redux/state"
+import { sendMessageAC, updateMessageTextAC } from "../../redux/dialogs-reducer"
 
-let newMessageElement = React.createRef()
-function sendMessage() {
-    alert(newMessageElement.current.value)
-}
+
+
 
 function Dialogs(props) {
+
+    function sendMessage() {
+        props.dispatch(sendMessageAC())
+    }
     
-    function updateField() {
-        props.dispatch(updateMessageTextAC())
+    function updateField(event) {
+        props.dispatch(updateMessageTextAC(event.target.value))
     }
 
     let dialogelem = props.state.dataDialogs.map(dialog => <Dialog name={dialog.name} id={dialog.id} img={dialog.img}></Dialog>)
@@ -26,7 +28,7 @@ function Dialogs(props) {
             <div className={s.messages}>
                 {meselem}
                 <p></p>
-                <textarea onChange={updateField} value={props.state.textFieldMessage} ref={newMessageElement} />
+                <textarea onChange={updateField} value={props.state.textFieldMessage}/>
                 <p></p>
                 <button onClick={sendMessage}>Send message</button>
             </div>

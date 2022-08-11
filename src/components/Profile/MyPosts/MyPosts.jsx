@@ -1,7 +1,8 @@
 import s from './MyPosts.module.css'
 import Post from './Post/Post';
 import React from 'react';
-import { addPostAC, updatePostTextAC } from '../../../redux/state';
+import { addPostAC, updatePostTextAC } from '../../../redux/profile-reducer';
+
 
 function MyPosts(props) {
 
@@ -14,7 +15,7 @@ function MyPosts(props) {
   }
 
   function updateField() {
-    props.dispatch(updatePostTextAC())
+    props.dispatch(updatePostTextAC(newPostElement.current.value))
   }
 
   return (

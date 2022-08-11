@@ -5,7 +5,7 @@ function Profile(props) {
   return (
     <div>
       <ProfileInfo></ProfileInfo>
-      <MyPosts dataPosts={props.state.dataPosts} dispatch = {props.dispatch}></MyPosts>
+      <MyPosts dataPosts={props.state.dataPosts} dispatch = {props.dispatch} textFieldPost = {props.state.textFieldPost}></MyPosts>
     </div>
   );
 }
