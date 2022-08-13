@@ -5,6 +5,7 @@ import App from './App';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import store from './redux/redux-store';
+import StoreContext, { Provider } from './StoreContext';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -14,9 +15,11 @@ console.log(123)
   root.render(
 
     <React.StrictMode>
-      <BrowserRouter>
-        <App store={store}/>
-      </BrowserRouter>
+        <BrowserRouter>
+        <Provider store={store}>
+          <App></App>
+        </Provider>
+        </BrowserRouter>
     </React.StrictMode>
   );
   }
