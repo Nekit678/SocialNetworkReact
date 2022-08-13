@@ -1,38 +1,23 @@
 import s from './MyPosts.module.css'
-import Post from './Post/Post';
 import React from 'react';
-import { add_post, update_text_field_post } from '../../../redux/profile-reducer';
-// import { addPostAC, updatePostTextAC } from '../../../redux/profile-reducer';
 
 
 
 function MyPosts(props) {
-
-  let postelem = props.dataPosts.map(post => <Post message={post.message} likesCount={post.likesCount}></Post>)
-
-  let newPostElement = React.createRef();
-
-  function addPost() {
-    props.dispatch(add_post())
-  }
-
-  function updateField() {
-    props.dispatch(update_text_field_post(newPostElement.current.value))
-  }
-
+  
   return (
     <div className={s.postsBlock}>
       <h3>My posts</h3>
       <div>
         <div>
-          <textarea onChange={updateField} ref={newPostElement} value={props.textFieldPost} />
+          <textarea onChange={(event)=>{props.updateField(event.target.value)}} value={props.textFieldPost} />
         </div>
         <div>
-          <button onClick={addPost}>Add post</button>
+          <button onClick={props.addPost}>Add post</button>
         </div>
       </div>
       <div className={s.posts}>
-        {postelem}
+        {props.postelem}
 
       </div>
     </div>

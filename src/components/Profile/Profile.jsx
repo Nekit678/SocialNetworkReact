@@ -1,4 +1,4 @@
-import MyPosts from './MyPosts/MyPosts';
+import MyPostsContainer from './MyPosts/MyPostsContainer';
 import ProfileInfo from './ProfileInfo/ProfileInfo';
 
 function Profile(props) {
@@ -6,7 +6,7 @@ function Profile(props) {
   return (
     <div>
       <ProfileInfo></ProfileInfo>
-      <MyPosts dataPosts={props.state.dataPosts} dispatch = {props.dispatch} textFieldPost = {props.state.textFieldPost}></MyPosts>
+      <MyPostsContainer store={props.store}></MyPostsContainer>
     </div>
   );
 }
