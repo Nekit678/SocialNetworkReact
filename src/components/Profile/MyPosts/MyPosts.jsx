@@ -1,7 +1,9 @@
 import s from './MyPosts.module.css'
 import Post from './Post/Post';
 import React from 'react';
-import { addPostAC, updatePostTextAC } from '../../../redux/profile-reducer';
+import { add_post, update_text_field_post } from '../../../redux/profile-reducer';
+// import { addPostAC, updatePostTextAC } from '../../../redux/profile-reducer';
+
 
 
 function MyPosts(props) {
@@ -11,11 +13,11 @@ function MyPosts(props) {
   let newPostElement = React.createRef();
 
   function addPost() {
-    props.dispatch(addPostAC())
+    props.dispatch(add_post())
   }
 
   function updateField() {
-    props.dispatch(updatePostTextAC(newPostElement.current.value))
+    props.dispatch(update_text_field_post(newPostElement.current.value))
   }
 
   return (

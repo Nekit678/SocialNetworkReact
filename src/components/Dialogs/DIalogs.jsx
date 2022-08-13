@@ -2,7 +2,8 @@ import s from "./Dialogs.module.css"
 import Dialog from "./DIalog/Dialog"
 import Message from "./Message/Message"
 import React from "react"
-import { sendMessageAC, updateMessageTextAC } from "../../redux/dialogs-reducer"
+import { send_message, update_text_field_message } from "../../redux/dialogs-reducer"
+// import { sendMessageAC, updateMessageTextAC } from "../../redux/dialogs-reducer"
 
 
 
@@ -10,13 +11,12 @@ import { sendMessageAC, updateMessageTextAC } from "../../redux/dialogs-reducer"
 function Dialogs(props) {
 
     function sendMessage() {
-        props.dispatch(sendMessageAC())
+        props.dispatch(send_message())
     }
     
     function updateField(event) {
-        props.dispatch(updateMessageTextAC(event.target.value))
+        props.dispatch(update_text_field_message(event.target.value))
     }
-
     let dialogelem = props.state.dataDialogs.map(dialog => <Dialog name={dialog.name} id={dialog.id} img={dialog.img}></Dialog>)
     let meselem = props.state.dataMessages.map(mes => <Message message={mes.message}></Message>)
 
