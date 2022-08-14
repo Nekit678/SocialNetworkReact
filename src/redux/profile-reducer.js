@@ -18,7 +18,7 @@ const profileSlice = createSlice(
                     likesCount: 0
                 };
 
-                state.dataPosts.push(newPost);
+                state.dataPosts.unshift(newPost);
                 state.textFieldPost = ""
             },
             update_text_field_post(state, action) {
