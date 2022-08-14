@@ -11,8 +11,8 @@ function DialogsContainer(props) {
     const state = useSelector(state => state.dialogsPage)
     const dispatch = useDispatch()
 
-    let dialogelem = state.dataDialogs.map(dialog => <Dialog name={dialog.name} id={dialog.id} img={dialog.img}></Dialog>);
-    let meselem = state.dataMessages.map(mes => <Message message={mes.message}></Message>);
+    let dialogelem = state.dataDialogs.map(dialog => <Dialog key={dialog.id} name={dialog.name} id={dialog.id} img={dialog.img}></Dialog>);
+    let meselem = state.dataMessages.map(mes => <Message key={mes.id} message={mes.message}></Message>);
 
     return (
         <Dialogs updateField={(text) => dispatch(update_text_field_message(text))}
