@@ -27,7 +27,7 @@ const usersSlice = createSlice(
                 user.followed = !user.followed
             },
             setUsers(state, action) {
-                state.users.push(...action.payload.users)
+                state.users.push(...action.payload)
             }
         }
     }

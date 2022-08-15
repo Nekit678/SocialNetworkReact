@@ -2,6 +2,7 @@ import React from "react";
 import s from "./Users.module.css"
 
 function Users(props) {
+
     return (
         <div >{props.users.map(user => <div key={user.id} className={s.item}>
             <span>
@@ -19,7 +20,7 @@ function Users(props) {
                     <div>{user.status}</div>
                 </span>
                 <span>
-                    <div>{user.location.counry}</div>
+                    <div>{user.location.country}</div>
                     <div>{user.location.city}</div>
                 </span>
             </span>
