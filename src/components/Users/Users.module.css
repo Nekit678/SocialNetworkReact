@@ -1,7 +1,11 @@
 .item{
     padding: 10px;
 }
-img{
+.item img{
     width: 50px;
     border-radius: 30px;
+}
+
+.selectedPage{
+    font-weight: bold;
 }
