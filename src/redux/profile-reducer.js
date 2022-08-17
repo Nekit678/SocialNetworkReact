@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 let initialState = {
+    userProfile : null,
     dataPosts: [{ id: 1, message: "Hi, how are you?", likesCount: 12 },
     { id: 2, message: "It is my first post!", likesCount: 28 }],
     textFieldPost: ""
@@ -23,12 +24,15 @@ const profileSlice = createSlice(
             },
             update_text_field_post(state, action) {
                 state.textFieldPost = action.payload;
+            },
+            setUserProfile(state,action){
+                state.userProfile = {...action.payload}
             }
         }
     }
 )
 
-export const { add_post, update_text_field_post } = profileSlice.actions
+export const { add_post, update_text_field_post, setUserProfile } = profileSlice.actions
 
 export default profileSlice.reducer
 

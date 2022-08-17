@@ -5,7 +5,7 @@ function Profile(props) {
 
   return (
     <div>
-      <ProfileInfo></ProfileInfo>
+      <ProfileInfo state = {props.state}></ProfileInfo>
       <MyPostsContainer></MyPostsContainer>
     </div>
   );
