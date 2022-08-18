@@ -21,7 +21,7 @@ function UsersContainer(props) {
 
     useEffect(() => {
         dispatch(toggleIsFetching(true))
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${state.currentPage}&count=${state.pageSize}`).then(
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${state.currentPage}&count=${state.pageSize}`,{ withCredentials: true}).then(
             response => {
                 dispatch(setUsers(response.data.items))
                 dispatch(setTotalUsersCount(response.data.totalCount))
@@ -32,7 +32,7 @@ function UsersContainer(props) {
     function onPageChanged(page) {
         dispatch(toggleIsFetching(true))
         dispatch(setCurrentPage(page))
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${state.pageSize}`).then(
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${state.pageSize}`,{ withCredentials: true}).then(
             response => {
                 dispatch(setUsers(response.data.items))
                 dispatch(toggleIsFetching(false))
@@ -40,10 +40,32 @@ function UsersContainer(props) {
     }
 
 
+    function unfollow(userId) {
+        axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`, { withCredentials: true,
+    headers: {"API-KEY":"4288335e-2c2b-45a0-919a-4022c291ebab"} }).then(
+            response => {
+                if (!response.data.resultCode) {
+                    dispatch(toggleFollow(userId))
+                }
+            })
+    }
+
+    function follow(userId) {
+        axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`, null, { withCredentials: true,
+        headers: {"API-KEY":"4288335e-2c2b-45a0-919a-4022c291ebab"} }).then(
+            response => {
+                if (!response.data.resultCode) {
+                    dispatch(toggleFollow(userId))
+                }
+            })
+    }
+
+
     return (
         <div>
-            {state.isFetching ? <Preloader></Preloader>: <Users isFetching={state.isFetching} pages={pages} currentPage={state.currentPage} users={state.users} follow={(id) => dispatch(toggleFollow(id))}
-                    unfollow={(id) => dispatch(toggleFollow(id))} onPageChanged={onPageChanged} ></Users>}
+            {state.isFetching ? <Preloader></Preloader> : <Users isFetching={state.isFetching} pages={pages} currentPage={state.currentPage}
+                users={state.users} follow={(userId) => follow(userId)}
+                unfollow={(userId) => unfollow(userId)} onPageChanged={onPageChanged} ></Users>}
         </div>
     )
 }
