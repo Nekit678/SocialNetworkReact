@@ -16,8 +16,9 @@ function App(props) {
       <Navbar></Navbar>
       <div className="app-wrapper-content">
         <Routes>
-          <Route path='/profile/*' element={<ProfileContainer/>} />
-          <Route path='/dialogs/*' element={<DialogsContainer/>} />
+          <Route path='/profile' element={<ProfileContainer />} />
+          <Route path='/profile/:id' element={<ProfileContainer />} />
+          <Route path='/dialogs/*' element={<DialogsContainer />} />
           <Route path='/news' element={<News />} />
           <Route path='/music' element={<Music />} />
           <Route path='/settings' element={<Settings />} />
