@@ -2,8 +2,8 @@ import Users from "./Users";
 import { useSelector, useDispatch } from 'react-redux/es/exports';
 import { setCurrentPage, setTotalUsersCount, setUsers, toggleFollow, toggleIsFetching } from "../../redux/users-reducer";
 import { useEffect } from 'react';
-import axios from 'axios';
 import Preloader from './../common/Preloader/Preloader';
+import { followAPI, usersAPI } from './../../api/api';
 
 
 
@@ -21,10 +21,10 @@ function UsersContainer(props) {
 
     useEffect(() => {
         dispatch(toggleIsFetching(true))
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${state.currentPage}&count=${state.pageSize}`,{ withCredentials: true}).then(
+        usersAPI.getUsers(state.currentPage,state.pageSize).then(
             response => {
-                dispatch(setUsers(response.data.items))
-                dispatch(setTotalUsersCount(response.data.totalCount))
+                dispatch(setUsers(response.items))
+                dispatch(setTotalUsersCount(response.totalCount))
                 dispatch(toggleIsFetching(false))
             })
     }, [])
@@ -32,17 +32,16 @@ function UsersContainer(props) {
     function onPageChanged(page) {
         dispatch(toggleIsFetching(true))
         dispatch(setCurrentPage(page))
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${state.pageSize}`,{ withCredentials: true}).then(
+        usersAPI.getUsers(page,state.pageSize).then(
             response => {
-                dispatch(setUsers(response.data.items))
+                dispatch(setUsers(response.items))
                 dispatch(toggleIsFetching(false))
             })
     }
 
 
     function unfollow(userId) {
-        axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`, { withCredentials: true,
-    headers: {"API-KEY":"4288335e-2c2b-45a0-919a-4022c291ebab"} }).then(
+        followAPI.unfollow(userId).then(
             response => {
                 if (!response.data.resultCode) {
                     dispatch(toggleFollow(userId))
@@ -51,8 +50,7 @@ function UsersContainer(props) {
     }
 
     function follow(userId) {
-        axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`, null, { withCredentials: true,
-        headers: {"API-KEY":"4288335e-2c2b-45a0-919a-4022c291ebab"} }).then(
+        followAPI.follow(userId).then(
             response => {
                 if (!response.data.resultCode) {
                     dispatch(toggleFollow(userId))

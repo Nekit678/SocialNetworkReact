@@ -1,9 +1,9 @@
-import axios from "axios";
 import Profile from "./Profile";
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux/es/exports';
 import { setUserProfile } from "../../redux/profile-reducer";
-import { useParams, useSearchParams } from "react-router-dom";
+import { useParams} from "react-router-dom";
+import { profileAPI } from "../../api/api";
 
 function ProfileContainer(props){
     const dispatch = useDispatch()
@@ -14,9 +14,9 @@ function ProfileContainer(props){
     let userId = (params.id ? params.id:id)
 
     useEffect(() => {
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`).then(
+        profileAPI.getProfileInfo(userId).then(
             response => {
-                dispatch(setUserProfile(response.data))
+                dispatch(setUserProfile(response))
             })
     }, [userId])
 
