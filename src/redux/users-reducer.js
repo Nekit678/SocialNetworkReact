@@ -18,7 +18,8 @@ let initialState = {
     totalUsersCount: 100,
     pageSize: 10,
     currentPage: 1,
-    isFetching: true
+    isFetching: true,
+    followingFetching: []
 }
 
 const usersSlice = createSlice(
@@ -41,10 +42,15 @@ const usersSlice = createSlice(
             },
             toggleIsFetching(state,action){
                 state.isFetching = action.payload
+            },
+            toggleFollowingFetching(state, action){
+                action.payload.operation ?
+                state.followingFetching.push(action.payload.id):
+                state.followingFetching = state.followingFetching.filter(id => id !== action.payload.id)
             }
         }
     }
 )
 
-export const { toggleFollow, setUsers, setCurrentPage, setTotalUsersCount, toggleIsFetching } = usersSlice.actions
+export const { toggleFollow, setUsers, setCurrentPage, setTotalUsersCount, toggleIsFetching, toggleFollowingFetching } = usersSlice.actions
 export default usersSlice.reducer
