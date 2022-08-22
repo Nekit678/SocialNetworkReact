@@ -1,26 +1,18 @@
-
 import Header from './Header';
 import { useSelector } from 'react-redux/es/exports';
 import { useDispatch } from 'react-redux/es/exports';
 import { useEffect } from 'react';
-import { setAuth } from '../../redux/auth-reducer';
-import { authAPI } from './../../api/api';
+import { getCurrentUser } from './../../redux/auth-reducer';
 
 function HeaderContainer(props) {
     const state = useSelector(state => state.auth)
-    const dispath = useDispatch();
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        authAPI.getCurrentUser().then(
-            response => {
-                if (!response.data.resultCode) {
-                    dispath(setAuth(response.data))
-                }
-            }
-        )
+        dispatch(getCurrentUser())
     })
     return (
-        <Header isAuth = {state.isAuth} login = {state.login}></Header>
+        <Header isAuth={state.isAuth} login={state.login}></Header>
     )
 }
 

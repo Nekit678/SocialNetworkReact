@@ -1,9 +1,8 @@
 import Users from "./Users";
 import { useSelector, useDispatch } from 'react-redux/es/exports';
-import { setCurrentPage, setTotalUsersCount, setUsers, toggleFollow, toggleFollowingFetching, toggleIsFetching } from "../../redux/users-reducer";
+import { followUser, unfollowUser, getUsers } from "../../redux/users-reducer";
 import { useEffect } from 'react';
 import Preloader from './../common/Preloader/Preloader';
-import { followAPI, usersAPI } from './../../api/api';
 
 
 
@@ -20,53 +19,26 @@ function UsersContainer(props) {
     }
 
     useEffect(() => {
-        dispatch(toggleIsFetching(true))
-        usersAPI.getUsers(state.currentPage,state.pageSize).then(
-            response => {
-                dispatch(setUsers(response.items))
-                dispatch(setTotalUsersCount(response.totalCount))
-                dispatch(toggleIsFetching(false))
-            })
+        dispatch(getUsers(state.currentPage, state.pageSize))
     }, [])
 
     function onPageChanged(page) {
-        dispatch(toggleIsFetching(true))
-        dispatch(setCurrentPage(page))
-        usersAPI.getUsers(page,state.pageSize).then(
-            response => {
-                dispatch(setUsers(response.items))
-                dispatch(toggleIsFetching(false))
-            })
+        dispatch(getUsers(page, state.pageSize))
     }
 
-
     function unfollow(userId) {
-        dispatch(toggleFollowingFetching({operation:true,id:userId}))
-        followAPI.unfollow(userId).then(
-            response => {
-                if (!response.data.resultCode) {
-                    dispatch(toggleFollow(userId))
-                }
-                dispatch(toggleFollowingFetching({operation:false,id:userId}))
-            })
+        dispatch(unfollowUser(userId))
     }
 
     function follow(userId) {
-        dispatch(toggleFollowingFetching({operation:true,id:userId}))
-        followAPI.follow(userId).then(
-            response => {
-                if (!response.data.resultCode) {
-                    dispatch(toggleFollow(userId))
-                }
-                dispatch(toggleFollowingFetching({operation:false,id:userId},userId))
-            })
+        dispatch(followUser(userId))
     }
 
     return (
         <div>
             {state.isFetching ? <Preloader></Preloader> : <Users isFetching={state.isFetching} pages={pages} currentPage={state.currentPage}
                 users={state.users} follow={(userId) => follow(userId)}
-                unfollow={(userId) => unfollow(userId)} onPageChanged={onPageChanged} followingFetching = {state.followingFetching} ></Users>}
+                unfollow={(userId) => unfollow(userId)} onPageChanged={onPageChanged} followingFetching={state.followingFetching} ></Users>}
         </div>
     )
 }

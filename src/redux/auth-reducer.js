@@ -1,10 +1,11 @@
 
 import { createSlice } from '@reduxjs/toolkit';
+import { authAPI } from './../api/api';
 
 let initialState = {
     userId: null,
-    login:null,
-    email:null,
+    login: null,
+    email: null,
     isAuth: false
 }
 
@@ -12,9 +13,8 @@ const authSlice = createSlice(
     {
         name: "auth",
         initialState: initialState,
-        reducers:{
-            setAuth(state,action)
-            {
+        reducers: {
+            setAuth(state, action) {
                 state.email = action.payload.email
                 state.login = action.payload.login
                 state.userId = action.payload.id
@@ -24,6 +24,16 @@ const authSlice = createSlice(
     }
 )
 
-
-export const {setAuth} = authSlice.actions
+export function getCurrentUser() {
+    return (dispatch) => {
+        authAPI.getCurrentUser().then(
+            response => {
+                if (!response.data.resultCode) {
+                    dispatch(setAuth(response.data))
+                }
+            }
+        )
+    }
+}
+export const { setAuth } = authSlice.actions
 export default authSlice.reducer

@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { followAPI, usersAPI } from './../api/api';
 
 let initialState = {
     users: [
@@ -34,23 +35,64 @@ const usersSlice = createSlice(
             setUsers(state, action) {
                 state.users = [...action.payload]
             },
-            setCurrentPage(state,action){
+            setCurrentPage(state, action) {
                 state.currentPage = action.payload
             },
-            setTotalUsersCount(state, action){
+            setTotalUsersCount(state, action) {
                 state.totalUsersCount = action.payload
             },
-            toggleIsFetching(state,action){
+            toggleIsFetching(state, action) {
                 state.isFetching = action.payload
             },
-            toggleFollowingFetching(state, action){
+            toggleFollowingFetching(state, action) {
                 action.payload.operation ?
-                state.followingFetching.push(action.payload.id):
-                state.followingFetching = state.followingFetching.filter(id => id !== action.payload.id)
+                    state.followingFetching.push(action.payload.id) :
+                    state.followingFetching = state.followingFetching.filter(id => id !== action.payload.id)
             }
         }
     }
 )
+
+
+export function getUsers(currentPage,pageSize){
+    return (dispatch) => {
+        dispatch(toggleIsFetching(true))
+        dispatch(setCurrentPage(currentPage))
+        usersAPI.getUsers(currentPage, pageSize).then(
+            response => {
+                dispatch(setUsers(response.items))
+                dispatch(setTotalUsersCount(response.totalCount))
+                dispatch(toggleIsFetching(false))
+            })
+    }
+}
+
+
+export function unfollowUser(userId){
+    return (dispatch) =>{
+        dispatch(toggleFollowingFetching({operation:true,id:userId}))
+        followAPI.unfollow(userId).then(
+            response => {
+                if (!response.data.resultCode) {
+                    dispatch(toggleFollow(userId))
+                }
+                dispatch(toggleFollowingFetching({operation:false,id:userId}))
+            })
+    }
+}
+
+export function followUser(userId){
+    return (dispatch) =>{
+        dispatch(toggleFollowingFetching({operation:true,id:userId}))
+        followAPI.follow(userId).then(
+            response => {
+                if (!response.data.resultCode) {
+                    dispatch(toggleFollow(userId))
+                }
+                dispatch(toggleFollowingFetching({operation:false,id:userId}))
+            })
+    }
+}
 
 export const { toggleFollow, setUsers, setCurrentPage, setTotalUsersCount, toggleIsFetching, toggleFollowingFetching } = usersSlice.actions
 export default usersSlice.reducer
