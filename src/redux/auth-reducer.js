@@ -28,7 +28,7 @@ export function getCurrentUser() {
     return (dispatch) => {
         authAPI.getCurrentUser().then(
             response => {
-                if (!response.data.resultCode) {
+                if (!response.resultCode) {
                     dispatch(setAuth(response.data))
                 }
             }
