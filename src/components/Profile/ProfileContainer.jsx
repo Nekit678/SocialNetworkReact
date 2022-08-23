@@ -3,13 +3,9 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux/es/exports';
 import { useParams } from "react-router-dom";
 import { getProfileInfo } from './../../redux/profile-reducer';
-import {useNavigate} from 'react-router-dom'
+import withAuthRedirect from './../../hoc/withAuthRedirect';
 
 function ProfileContainer(props) {
-
-    const isAuth = useSelector(state => state.auth.isAuth)
-    let navigate = useNavigate()
-
     const dispatch = useDispatch()
     const state = useSelector(state => state.profilePage.userProfile)
     const id = useSelector(state => state.auth.userId)
@@ -19,14 +15,13 @@ function ProfileContainer(props) {
 
     useEffect(() => {
         dispatch(getProfileInfo(userId))
-        if (!isAuth){
-            navigate("/login", {replace:true})
-        }
-    }, [userId,isAuth])
+    }, [userId])
 
     return (
         <Profile state={state}></Profile>
     )
 }
 
-export default ProfileContainer;
+let ProfileContainerAuth = withAuthRedirect(ProfileContainer)
+
+export default ProfileContainerAuth;

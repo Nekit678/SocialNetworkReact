@@ -3,12 +3,12 @@ import Navbar from './components/Navbar/Navbar';
 import { Route, Routes } from "react-router-dom"
 import News from './components/News/News';
 import Music from './components/Music/Music';
-import Settings from './components/Settings/Settings';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
 import UsersContainer from './components/Users/UsersContainer';
 import ProfileContainer from './components/Profile/ProfileContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
 import Login from './components/Login/Login';
+import SettingsContainer from './components/Settings/SettingsContainer';
 
 function App(props) {
   return (
@@ -22,7 +22,7 @@ function App(props) {
           <Route path='/dialogs/*' element={<DialogsContainer />} />
           <Route path='/news' element={<News />} />
           <Route path='/music' element={<Music />} />
-          <Route path='/settings' element={<Settings />} />
+          <Route path='/settings' element={<SettingsContainer />} />
           <Route path='/users' element={<UsersContainer></UsersContainer>} />
           <Route path='/login' element={<Login></Login>}/>
         </Routes>
