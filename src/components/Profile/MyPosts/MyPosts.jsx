@@ -4,7 +4,6 @@ import React from 'react';
 
 
 function MyPosts(props) {
-  
   return (
     <div className={s.postsBlock}>
       <h3>My posts</h3>

@@ -3,7 +3,6 @@ import s from './ProfileInfo.module.css'
 import ProfileStatus from './ProfileStatus';
 
 function ProfileInfo(props) {
-
   if (!props.state) {
     return <Preloader></Preloader>
   }
@@ -20,7 +19,7 @@ function ProfileInfo(props) {
           <p></p>
           Обо мне: {props.state.aboutMe}
         </div>
-        <ProfileStatus status="Hello World!"></ProfileStatus>
+        <ProfileStatus updateStatus = {props.updateStatus} status={props.status}></ProfileStatus>
       </div>
     );
   }

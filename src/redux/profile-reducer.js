@@ -5,7 +5,8 @@ let initialState = {
     userProfile: null,
     dataPosts: [{ id: 1, message: "Hi, how are you?", likesCount: 12 },
     { id: 2, message: "It is my first post!", likesCount: 28 }],
-    textFieldPost: ""
+    textFieldPost: "",
+    status: ""
 }
 
 const profileSlice = createSlice(
@@ -28,6 +29,9 @@ const profileSlice = createSlice(
             },
             setUserProfile(state, action) {
                 state.userProfile = { ...action.payload }
+            },
+            setStatus(state, action) {
+                state.status = action.payload
             }
         }
     }
@@ -42,7 +46,30 @@ export function getProfileInfo(userId) {
     }
 }
 
-export const { add_post, update_text_field_post, setUserProfile } = profileSlice.actions
+export function getUserStatus(userId) {
+    return (dispatch) => {
+        profileAPI.getStatus(userId).then(
+            response => {
+                dispatch(setStatus(response))
+            }
+        )
+    }
+}
+
+export function updateStatus(status) {
+    return (dispatch) => {
+        profileAPI.updateStatus(status).then(
+            response => {
+                if (!response.resultCode){
+                    dispatch(setStatus(status))
+                }   
+            }
+        )
+    }
+}
+
+
+export const { add_post, update_text_field_post, setUserProfile, setStatus } = profileSlice.actions
 
 export default profileSlice.reducer
 
