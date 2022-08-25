@@ -1,0 +1,29 @@
+.errorTextarea textarea{
+    border: solid red 3px;
+}
+.errorTextarea div{
+    color: red;
+}
+
+.errorTextarea img{
+    width: 30px;
+    height: 30px;
+    border-radius: 80px;
+    margin-left: 5px;
+    margin-bottom: 5px;
+}
+
+.errorInput input{
+    border: solid red 3px;
+    background-color: white;
+    background: url(https://png.pngtree.com/element_our/20200610/ourlarge/pngtree-red-error-icon-image_2248553.jpg) no-repeat 147px 0px;
+    background-size: auto 113%;
+    background-color: white;
+}
+
+.errorInput img{
+    width: 25px;
+    height: 25px;
+    border-radius: 80px;
+    margin-left: 5px;
+}
