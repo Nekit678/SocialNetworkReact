@@ -21,20 +21,17 @@ const dialogsSlice = createSlice(
             send_message(state, action) {
                 let newMessage = {
                     id: 5,
-                    message: state.textFieldMessage
+                    message: action.payload
                 };
 
                 state.dataMessages.push(newMessage)
                 state.textFieldMessage = ""
-            },
-            update_text_field_message(state,action){
-                state.textFieldMessage = action.payload;
             }
         }
     }
 )
 
-export const {send_message, update_text_field_message} = dialogsSlice.actions
+export const {send_message} = dialogsSlice.actions
 export default dialogsSlice.reducer
 
 

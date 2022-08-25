@@ -1,8 +1,30 @@
 import s from "./Dialogs.module.css"
+import { Formik } from 'formik';
+import { Field } from 'formik';
+import { Form } from 'formik';
+
+
+function DialogsForm(props) {
+    return (
+        <Formik initialValues={{ textMessage: '' }}
+            onSubmit={(values, { resetForm }) => {
+                props.sendMessage(values.textMessage)
+                resetForm()
+            }}>
+            <Form>
+                <div>
+                    <Field name="textMessage" placeholder="Enter your message" component="textarea" />
+                </div>
+                <div>
+                    <button name="sendMessage" type="submit">Send Message</button>
+                </div>
+            </Form>
+        </Formik>
+    )
+}
+
 
 function Dialogs(props) {
-
-
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
@@ -10,10 +32,7 @@ function Dialogs(props) {
             </div>
             <div className={s.messages}>
                 {props.meselem}
-                <p></p>
-                <textarea onChange={(event)=>{props.updateField(event.target.value)}} value={props.textFieldMessage}/>
-                <p></p>
-                <button onClick={props.sendMessage}>Send message</button>
+                <DialogsForm sendMessage = {props.sendMessage}></DialogsForm>
             </div>
         </div>
     );

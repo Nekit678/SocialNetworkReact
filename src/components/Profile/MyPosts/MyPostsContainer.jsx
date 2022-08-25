@@ -11,8 +11,7 @@ function MyPostsContainer(props) {
 
     return (
         <MyPosts textFieldPost={state.textFieldPost} postelem={postelem}
-            updateField={(text) => dispatch(update_text_field_post(text))}
-            addPost={() => dispatch(add_post())}></MyPosts>
+            addPost={(textPost) => dispatch(add_post(textPost))}></MyPosts>
     )
 }
 

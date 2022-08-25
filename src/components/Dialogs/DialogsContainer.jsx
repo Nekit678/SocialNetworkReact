@@ -16,9 +16,7 @@ function DialogsContainer(props) {
     let meselem = state.dataMessages.map(mes => <Message key={mes.id} message={mes.message}></Message>);
 
     return (
-        <Dialogs updateField={(text) => dispatch(update_text_field_message(text))}
-            sendMessage={() => dispatch(send_message())}
-            textFieldMessage={state.textFieldMessage}
+        <Dialogs sendMessage={(textMessage) => dispatch(send_message(textMessage))}
             dialogelem={dialogelem}
             meselem={meselem}></Dialogs>
     )

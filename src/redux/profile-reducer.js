@@ -17,15 +17,10 @@ const profileSlice = createSlice(
             add_post(state, action) {
                 let newPost = {
                     id: 5,
-                    message: state.textFieldPost,
+                    message: action.payload,
                     likesCount: 0
                 };
-
                 state.dataPosts.unshift(newPost);
-                state.textFieldPost = ""
-            },
-            update_text_field_post(state, action) {
-                state.textFieldPost = action.payload;
             },
             setUserProfile(state, action) {
                 state.userProfile = { ...action.payload }
@@ -69,7 +64,7 @@ export function updateStatus(status) {
 }
 
 
-export const { add_post, update_text_field_post, setUserProfile, setStatus } = profileSlice.actions
+export const { add_post, setUserProfile, setStatus } = profileSlice.actions
 
 export default profileSlice.reducer
 
