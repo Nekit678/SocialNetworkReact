@@ -35,5 +35,18 @@ export function getCurrentUser() {
         )
     }
 }
+
+export function login(formInfo){
+    return (dispatch)=>{
+        authAPI.login(formInfo).then(
+            response =>{
+                if (!response.resultCode){
+                    dispatch(getCurrentUser())
+                }
+            }
+        )
+    }
+}
+
 export const { setAuth } = authSlice.actions
 export default authSlice.reducer
