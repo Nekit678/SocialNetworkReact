@@ -1,5 +1,5 @@
 import { Field, Form, Formik } from "formik"
-import { useDispatch} from 'react-redux/es/exports';
+import { useDispatch } from 'react-redux/es/exports';
 import { login } from "../../redux/auth-reducer";
 import { Input } from "../common/FormsControls/FormsControls";
 import { maxLength, requiredField } from "../../utils/validators";
@@ -18,21 +18,26 @@ function LoginForm(props) {
                 if (onlySpace(values.password)) { errors.password = onlySpace(values.password) }
                 return errors;
             }}
-            onSubmit={(values) => props.loginUser(values)}>
+            onSubmit={(values, { setSubmitting, setStatus }) => {
+                props.loginUser(values, setStatus);
+                setSubmitting(false)
+            }}>
+            {({status, isSubmitting}) => (
             <Form>
-                <div>
+                <div> {status}
                     <Field name="email" placeholder={"email"} component={Input} />
                 </div>
                 <div>
-                    <Field name="password" type="password" placeholder={"Password"} component={Input}/>
+                    <Field name="password" type="password" placeholder={"Password"} component={Input} />
                 </div>
                 <div>
                     <Field name="rememberMe" type="checkbox" />Remember me
                 </div>
                 <div>
-                    <button name="LoginButton" type="submit" >Login</button>
+                    <button disabled={isSubmitting} name="LoginButton" type="submit" >Login</button>
                 </div>
-            </Form>
+            </Form>)
+}
         </Formik>
     )
 }
@@ -40,8 +45,8 @@ function LoginForm(props) {
 function Login(props) {
     const dispatch = useDispatch()
 
-    function loginUser(formInfo) {
-        dispatch(login(formInfo))
+    function loginUser(formInfo,setStatus) {
+        dispatch(login(formInfo,setStatus))
     }
 
     return <div>
