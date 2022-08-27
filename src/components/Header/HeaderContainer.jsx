@@ -8,10 +8,6 @@ function HeaderContainer(props) {
     const state = useSelector(state => state.auth)
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        dispatch(getCurrentUser())
-    })
-
     function logoutUser(){
         dispatch(logout())
     }

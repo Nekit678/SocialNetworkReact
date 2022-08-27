@@ -1,9 +1,11 @@
 import { Field, Form, Formik } from "formik"
-import { useDispatch } from 'react-redux/es/exports';
+import { useDispatch, useSelector } from 'react-redux/es/exports';
 import { login } from "../../redux/auth-reducer";
 import { Input } from "../common/FormsControls/FormsControls";
 import { maxLength, requiredField } from "../../utils/validators";
 import { onlySpace } from './../../utils/validators';
+import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 function LoginForm(props) {
     return (
@@ -22,22 +24,22 @@ function LoginForm(props) {
                 props.loginUser(values, setStatus);
                 setSubmitting(false)
             }}>
-            {({status, isSubmitting}) => (
-            <Form>
-                <div> {status}
-                    <Field name="email" placeholder={"email"} component={Input} />
-                </div>
-                <div>
-                    <Field name="password" type="password" placeholder={"Password"} component={Input} />
-                </div>
-                <div>
-                    <Field name="rememberMe" type="checkbox" />Remember me
-                </div>
-                <div>
-                    <button disabled={isSubmitting} name="LoginButton" type="submit" >Login</button>
-                </div>
-            </Form>)
-}
+            {({ status, isSubmitting }) => (
+                <Form>
+                    <div> {status}
+                        <Field name="email" placeholder={"email"} component={Input} />
+                    </div>
+                    <div>
+                        <Field name="password" type="password" placeholder={"Password"} component={Input} />
+                    </div>
+                    <div>
+                        <Field name="rememberMe" type="checkbox" />Remember me
+                    </div>
+                    <div>
+                        <button disabled={isSubmitting} name="LoginButton" type="submit" >Login</button>
+                    </div>
+                </Form>)
+            }
         </Formik>
     )
 }
@@ -45,9 +47,18 @@ function LoginForm(props) {
 function Login(props) {
     const dispatch = useDispatch()
 
-    function loginUser(formInfo,setStatus) {
-        dispatch(login(formInfo,setStatus))
+    function loginUser(formInfo, setStatus) {
+        dispatch(login(formInfo, setStatus))
     }
+
+    const isAuth = useSelector(state => state.auth.isAuth)
+    let navigate = useNavigate()
+
+    useEffect(() => {
+        if (isAuth) {
+            navigate("/profile", { replace: true })
+        }
+    }, [isAuth])
 
     return <div>
         <h1>Login</h1>

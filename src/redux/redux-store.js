@@ -1,4 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit'
+import appReducer from './app-reducer'
 import authReducer from './auth-reducer'
 import dialogsReducer from './dialogs-reducer'
 import profileReducer from './profile-reducer'
@@ -11,7 +12,8 @@ let store = configureStore({
         dialogsPage: dialogsReducer,
         sidebar: sidebarReducer,
         usersPage: usersReducer,
-        auth: authReducer
+        auth: authReducer,
+        app: appReducer
     }
 })
 

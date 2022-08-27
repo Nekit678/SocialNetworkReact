@@ -32,7 +32,7 @@ const authSlice = createSlice(
 
 export function getCurrentUser() {
     return (dispatch) => {
-        authAPI.getCurrentUser().then(
+        return authAPI.getCurrentUser().then(
             response => {
                 if (!response.resultCode) {
                     dispatch(setAuth(response.data))
