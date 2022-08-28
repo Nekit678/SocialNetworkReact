@@ -11,8 +11,7 @@ import Login from './components/Login/Login';
 import SettingsContainer from './components/Settings/SettingsContainer';
 import { useDispatch, useSelector } from 'react-redux/es/exports';
 import { useEffect } from 'react';
-import { getCurrentUser } from './redux/auth-reducer';
-import { init } from './redux/app-reducer';
+import { init } from './redux/reducers/app-reducer';
 import Preloader from './components/common/Preloader/Preloader';
 
 function App(props) {
@@ -22,7 +21,7 @@ function App(props) {
 
   useEffect(() => {
     dispatch(init())
-  }, [])
+  }, [dispatch])
 
   if (!checkInit) {
     return (<Preloader></Preloader>)

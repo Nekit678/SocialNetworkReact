@@ -1,6 +1,6 @@
 import { Field, Form, Formik } from "formik"
 import { useDispatch, useSelector } from 'react-redux/es/exports';
-import { login } from "../../redux/auth-reducer";
+import { login } from "../../redux/reducers/auth-reducer";
 import { Input } from "../common/FormsControls/FormsControls";
 import { maxLength, requiredField } from "../../utils/validators";
 import { onlySpace } from './../../utils/validators';
@@ -58,7 +58,7 @@ function Login(props) {
         if (isAuth) {
             navigate("/profile", { replace: true })
         }
-    }, [isAuth])
+    }, [isAuth,navigate])
 
     return <div>
         <h1>Login</h1>

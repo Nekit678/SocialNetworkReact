@@ -1,6 +1,4 @@
-
 import { createSlice } from '@reduxjs/toolkit';
-import { authAPI } from './../api/api';
 import { getCurrentUser } from './auth-reducer';
 
 let initialState = {
@@ -25,5 +23,5 @@ export function init() {
     }
 }
 
-export const { setInitializing} = appSlice.actions
+export const { setInitializing } = appSlice.actions
 export default appSlice.reducer

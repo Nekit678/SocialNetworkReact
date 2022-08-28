@@ -1,6 +1,6 @@
 import Users from "./Users";
 import { useSelector, useDispatch } from 'react-redux/es/exports';
-import { followUser, unfollowUser, getUsers } from "../../redux/users-reducer";
+import { followUser, unfollowUser, getUsers } from "../../redux/reducers/users-reducer";
 import { useEffect } from 'react';
 import Preloader from './../common/Preloader/Preloader';
 
@@ -20,7 +20,7 @@ function UsersContainer(props) {
 
     useEffect(() => {
         dispatch(getUsers(state.currentPage, state.pageSize))
-    }, [])
+    }, [dispatch])
 
     function onPageChanged(page) {
         dispatch(getUsers(page, state.pageSize))

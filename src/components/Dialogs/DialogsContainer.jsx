@@ -1,5 +1,5 @@
 import Dialogs from "./Dialogs";
-import { send_message, update_text_field_message } from "../../redux/dialogs-reducer"
+import { send_message} from "../../redux/reducers/dialogs-reducer"
 import Dialog from "./Dialog/Dialog";
 import Message from "./Message/Message";
 import { useSelector } from 'react-redux/es/exports';

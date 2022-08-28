@@ -1,6 +1,6 @@
 
 import { createSlice } from '@reduxjs/toolkit';
-import { authAPI } from './../api/api';
+import { authAPI } from '../../api/api';
 
 let initialState = {
     userId: null,

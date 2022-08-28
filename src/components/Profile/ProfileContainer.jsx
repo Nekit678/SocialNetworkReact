@@ -2,7 +2,7 @@ import Profile from "./Profile";
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux/es/exports';
 import { useParams } from "react-router-dom";
-import { getProfileInfo, getUserStatus, updateStatus } from './../../redux/profile-reducer';
+import { getProfileInfo, getUserStatus, updateStatus } from './../../redux/reducers/profile-reducer';
 import withAuthRedirect from './../../hoc/withAuthRedirect';
 
 function ProfileContainer(props) {
@@ -17,7 +17,7 @@ function ProfileContainer(props) {
     useEffect(() => {
         dispatch(getProfileInfo(userId))
         dispatch(getUserStatus(userId))
-    }, [userId])
+    }, [userId,dispatch])
     
     function updateUserStatus(status)
     {

@@ -1,5 +1,5 @@
 import MyPosts from "./MyPosts";
-import { add_post, update_text_field_post } from '../../../redux/profile-reducer';
+import { add_post } from '../../../redux/reducers/profile-reducer';
 import Post from "./Post/Post";
 import { useDispatch, useSelector } from "react-redux/es/exports";
 

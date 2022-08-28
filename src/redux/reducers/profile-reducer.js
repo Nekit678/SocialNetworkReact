@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { profileAPI } from '../api/api';
+import { profileAPI } from '../../api/api';
 
 let initialState = {
     userProfile: null,

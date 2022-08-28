@@ -1,8 +1,7 @@
 import Header from './Header';
 import { useSelector } from 'react-redux/es/exports';
 import { useDispatch } from 'react-redux/es/exports';
-import { useEffect } from 'react';
-import { getCurrentUser, logout } from './../../redux/auth-reducer';
+import {logout } from '../../redux/reducers/auth-reducer';
 
 function HeaderContainer(props) {
     const state = useSelector(state => state.auth)
