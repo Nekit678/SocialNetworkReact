@@ -3,19 +3,14 @@ import { useSelector, useDispatch } from 'react-redux/es/exports';
 import { followUser, unfollowUser, getUsers } from "../../redux/reducers/users-reducer";
 import { useEffect } from 'react';
 import Preloader from './../common/Preloader/Preloader';
-import { getCurrentPage, getFollowingFetching, getIsFetching } from "../../redux/selectors/users-selector";
-import { getPageSize, getUsersList, getTotalUsersCount } from './../../redux/selectors/users-selector';
+import {getUsersPageInfo} from './../../redux/selectors/users-selector';
 
 
 
 function UsersContainer(props) {
 
     const dispatch = useDispatch()
-    const currentPage = useSelector((state)=>getCurrentPage(state))
-    const pageSize = useSelector((state) => getPageSize(state))
-    const users = useSelector((state) => getUsersList(state))
-    const isFetching = useSelector((state) => getIsFetching(state))
-    const followingFetching = useSelector((state) => getFollowingFetching(state))
+    const usersPageInfo = useSelector(getUsersPageInfo)
     
     // const totalUsersCount = useSelector((state) => getTotalUsersCount(state))
     // let pagesCount = Math.ceil(state.totalUsersCount / state.pageSize)
@@ -26,11 +21,11 @@ function UsersContainer(props) {
     }
 
     useEffect(() => {
-        dispatch(getUsers(currentPage, pageSize))
+        dispatch(getUsers(usersPageInfo.currentPage, usersPageInfo.pageSize))
     }, [dispatch])
 
     function onPageChanged(page) {
-        dispatch(getUsers(page, pageSize))
+        dispatch(getUsers(page, usersPageInfo.pageSize))
     }
 
     function unfollow(userId) {
@@ -43,9 +38,9 @@ function UsersContainer(props) {
 
     return (
         <div>
-            {isFetching ? <Preloader></Preloader> : <Users isFetching={isFetching} pages={pages} currentPage={currentPage}
-                users={users} follow={(userId) => follow(userId)}
-                unfollow={(userId) => unfollow(userId)} onPageChanged={onPageChanged} followingFetching={followingFetching} ></Users>}
+            {usersPageInfo.isFetching ? <Preloader></Preloader> : <Users isFetching={usersPageInfo.isFetching} pages={pages} currentPage={usersPageInfo.currentPage}
+                users={usersPageInfo.users} follow={(userId) => follow(userId)}
+                unfollow={(userId) => unfollow(userId)} onPageChanged={onPageChanged} followingFetching={usersPageInfo.followingFetching} ></Users>}
         </div>
     )
 }
