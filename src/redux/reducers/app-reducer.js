@@ -18,8 +18,9 @@ const appSlice = createSlice(
 )
 
 export function init() {
-    return (dispatch) => {
-        dispatch(getCurrentUser()).then(() => dispatch(setInitializing()))
+    return async (dispatch) => {
+        await dispatch(getCurrentUser())
+        dispatch(setInitializing())
     }
 }
 

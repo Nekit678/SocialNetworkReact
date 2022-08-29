@@ -12,40 +12,49 @@ const instance = axios.create(
 
 
 export const usersAPI = {
-    getUsers(currentPage = 1, pageSize = 10) {
-        return instance.get(`users?page=${currentPage}&count=${pageSize}`).then(responce => responce.data)
+    async getUsers(currentPage = 1, pageSize = 10) {
+        let response = await instance.get(`users?page=${currentPage}&count=${pageSize}`)
+        return response.data
     }
 }
 
 export const followAPI = {
-    follow(userId) {
-        return instance.post(`follow/${userId}`).then(response => response.data)
+    async follow(userId) {
+        let response = await instance.post(`follow/${userId}`);
+        return response.data;
     },
-    unfollow(userId) {
-        return instance.delete(`follow/${userId}`).then(response => response.data)
+    async unfollow(userId) {
+        let response = await instance.delete(`follow/${userId}`)
+        return response.data
     }
 }
 
 export const authAPI = {
-    getCurrentUser() {
-        return instance.get(`auth/me`).then(response => response.data)
+    async getCurrentUser() {
+        let response = await instance.get(`auth/me`)
+        return response.data
     },
-    login(formInfo) {
-        return instance.post(`auth/login`, formInfo).then(response => response.data)
+    async login(formInfo) {
+        let response = await instance.post(`auth/login`, formInfo)
+        return response.data
     },
-    logout(){
-        return instance.delete(`auth/login`).then(response => response.data)
+    async logout() {
+        let response = await instance.delete(`auth/login`)
+        return response.data
     }
 }
 
 export const profileAPI = {
-    getProfileInfo(userId) {
-        return instance.get(`profile/${userId}`).then(response => response.data)
+    async getProfileInfo(userId) {
+        let response = await instance.get(`profile/${userId}`)
+        return response.data
     },
-    getStatus(userId) {
-        return instance.get(`profile/status/${userId}`).then(response => response.data)
+    async getStatus(userId) {
+        let response = await instance.get(`profile/status/${userId}`)
+        return response.data
     },
-    updateStatus(status) {
-        return instance.put(`profile/status`, { status: status }).then(response => response.data)
+    async updateStatus(status) {
+        let response = await instance.put(`profile/status`, { status: status })
+        return response.data
     }
 }

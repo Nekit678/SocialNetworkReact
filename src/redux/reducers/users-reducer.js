@@ -54,43 +54,39 @@ const usersSlice = createSlice(
 )
 
 
-export function getUsers(currentPage,pageSize){
-    return (dispatch) => {
+export function getUsers(currentPage, pageSize) {
+    return async (dispatch) => {
         dispatch(toggleIsFetching(true))
         dispatch(setCurrentPage(currentPage))
-        usersAPI.getUsers(currentPage, pageSize).then(
-            response => {
-                dispatch(setUsers(response.items))
-                dispatch(setTotalUsersCount(response.totalCount))
-                dispatch(toggleIsFetching(false))
-            })
+        let response = await usersAPI.getUsers(currentPage, pageSize)
+        dispatch(setUsers(response.items))
+        dispatch(setTotalUsersCount(response.totalCount))
+        dispatch(toggleIsFetching(false))
+
     }
 }
 
 
-export function unfollowUser(userId){
-    return (dispatch) =>{
-        dispatch(toggleFollowingFetching({operation:true,id:userId}))
-        followAPI.unfollow(userId).then(
-            response => {
-                if (!response.data.resultCode) {
-                    dispatch(toggleFollow(userId))
-                }
-                dispatch(toggleFollowingFetching({operation:false,id:userId}))
-            })
+export function unfollowUser(userId) {
+    return async (dispatch) => {
+        dispatch(toggleFollowingFetching({ operation: true, id: userId }))
+        let response = await followAPI.unfollow(userId)
+        if (!response.data.resultCode) {
+            dispatch(toggleFollow(userId))
+        }
+        dispatch(toggleFollowingFetching({ operation: false, id: userId }))
     }
 }
 
-export function followUser(userId){
-    return (dispatch) =>{
-        dispatch(toggleFollowingFetching({operation:true,id:userId}))
-        followAPI.follow(userId).then(
-            response => {
-                if (!response.data.resultCode) {
-                    dispatch(toggleFollow(userId))
-                }
-                dispatch(toggleFollowingFetching({operation:false,id:userId}))
-            })
+export function followUser(userId) {
+    return async (dispatch) => {
+        dispatch(toggleFollowingFetching({ operation: true, id: userId }))
+        let response = await followAPI.follow(userId)
+
+        if (!response.data.resultCode) {
+            dispatch(toggleFollow(userId))
+        }
+        dispatch(toggleFollowingFetching({ operation: false, id: userId }))
     }
 }
 

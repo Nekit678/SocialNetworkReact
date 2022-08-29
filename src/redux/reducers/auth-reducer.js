@@ -20,7 +20,7 @@ const authSlice = createSlice(
                 state.userId = action.payload.id
                 state.isAuth = true
             },
-            resetAuth(state,action){
+            resetAuth(state, action) {
                 state.email = null
                 state.login = null
                 state.userId = null
@@ -31,44 +31,35 @@ const authSlice = createSlice(
 )
 
 export function getCurrentUser() {
-    return (dispatch) => {
-        return authAPI.getCurrentUser().then(
-            response => {
-                if (!response.resultCode) {
-                    dispatch(setAuth(response.data))
-                }
-            }
+    return async (dispatch) => {
+        let response = await authAPI.getCurrentUser()
+        if (!response.resultCode) {
+            dispatch(setAuth(response.data))
+        }
+    }
+}
+
+export function login(formInfo, setStatus) {
+    return async (dispatch) => {
+        let response = await authAPI.login(formInfo)
+        setStatus("")
+        if (!response.resultCode) {
+            dispatch(getCurrentUser())
+        }
+        else (
+            setStatus(response.messages)
         )
     }
 }
 
-export function login(formInfo,setStatus){
-    return (dispatch)=>{
-        authAPI.login(formInfo).then(
-            response =>{
-                setStatus("")
-                if (!response.resultCode){
-                    dispatch(getCurrentUser())
-                }
-                else(
-                    setStatus(response.messages)
-                )
-            }
-        )
+export function logout() {
+    return async (dispatch) => {
+        let response = await authAPI.logout()
+        if (!response.resultCode) {
+            dispatch(resetAuth())
+        }
     }
 }
 
-export function logout(){
-    return (dispatch)=>{
-        authAPI.logout().then(
-            response =>{
-                if (!response.resultCode){
-                    dispatch(resetAuth())
-                }
-            }
-        )
-    }
-}
-
-export const { setAuth, resetAuth} = authSlice.actions
+export const { setAuth, resetAuth } = authSlice.actions
 export default authSlice.reducer

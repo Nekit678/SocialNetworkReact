@@ -33,35 +33,32 @@ const profileSlice = createSlice(
 )
 
 export function getProfileInfo(userId) {
-    return (dispatch) => {
-        profileAPI.getProfileInfo(userId).then(
-            response => {
-                dispatch(setUserProfile(response))
-            })
+    return async (dispatch) => {
+        let response = await profileAPI.getProfileInfo(userId)
+        dispatch(setUserProfile(response))
     }
 }
+
 
 export function getUserStatus(userId) {
-    return (dispatch) => {
-        profileAPI.getStatus(userId).then(
-            response => {
-                dispatch(setStatus(response))
-            }
-        )
+    return async (dispatch) => {
+        let response = await profileAPI.getStatus(userId)
+        dispatch(setStatus(response))
     }
+
 }
 
+
 export function updateStatus(status) {
-    return (dispatch) => {
-        profileAPI.updateStatus(status).then(
-            response => {
-                if (!response.resultCode){
-                    dispatch(setStatus(status))
-                }   
-            }
-        )
+    return async (dispatch) => {
+        let response = await profileAPI.updateStatus(status)
+        if (!response.resultCode) {
+            dispatch(setStatus(status))
+        }
     }
+
 }
+
 
 
 export const { add_post, setUserProfile, setStatus } = profileSlice.actions
