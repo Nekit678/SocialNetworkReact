@@ -6,19 +6,10 @@ import Preloader from './../common/Preloader/Preloader';
 import {getUsersPageInfo} from './../../redux/selectors/users-selector';
 
 
-
 function UsersContainer(props) {
 
     const dispatch = useDispatch()
     const usersPageInfo = useSelector(getUsersPageInfo)
-    
-    // const totalUsersCount = useSelector((state) => getTotalUsersCount(state))
-    // let pagesCount = Math.ceil(state.totalUsersCount / state.pageSize)
-    let pages = [];
-
-    for (let i = 1; i <= 10; i++) {
-        pages.push(i);
-    }
 
     useEffect(() => {
         dispatch(getUsers(usersPageInfo.currentPage, usersPageInfo.pageSize))
@@ -38,9 +29,8 @@ function UsersContainer(props) {
 
     return (
         <div>
-            {usersPageInfo.isFetching ? <Preloader></Preloader> : <Users isFetching={usersPageInfo.isFetching} pages={pages} currentPage={usersPageInfo.currentPage}
-                users={usersPageInfo.users} follow={(userId) => follow(userId)}
-                unfollow={(userId) => unfollow(userId)} onPageChanged={onPageChanged} followingFetching={usersPageInfo.followingFetching} ></Users>}
+            {usersPageInfo.isFetching ? <Preloader></Preloader> : <Users follow={(userId) => follow(userId)} unfollow={(userId) => unfollow(userId)}
+            onPageChanged={onPageChanged} {...usersPageInfo}></Users>}
         </div>
     )
 }
