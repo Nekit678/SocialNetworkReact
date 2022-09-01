@@ -1,7 +1,8 @@
 import { NavLink } from 'react-router-dom';
 import s from "../Users.module.css"
+import React from 'react';
 
-function User(props) {
+const User = (props) => {
     return (
         <div className={s.item}>
             <span>

@@ -1,23 +1,18 @@
 import Preloader from '../../common/Preloader/Preloader';
 import s from './ProfileInfo.module.css'
 import ProfileStatus from './ProfileStatus';
+import DescriptionBlock from './DescriptonBlock';
 
 function ProfileInfo(props) {
-  if (!props.state) {
+  if (!props.userProfile) {
     return <Preloader></Preloader>
   }
   else {
     return (
       <div>
-        {/* <div>
-          <img className={s.img} src="https://media-exp1.licdn.com/dms/image/C4D1BAQGDmALg_8s-Yg/company-background_10000/0/1519799119530?e=2159024400&v=beta&t=4WV9YKR9L3PAEnppWmPPMk5xVnETtWvhZN8NexEzPwM"></img>
-        </div> */}
         <div className={s.descriptionBlock}>
-          <img src={props.state.photos.large ?props.state.photos.large:"https://img2.freepng.ru/20180410/bbw/kisspng-avatar-user-medicine-surgery-patient-avatar-5acc9f7a7cb983.0104600115233596105109.jpg" }></img>
-          <p></p>
-          {props.state.fullName}
-          <p></p>
-          Обо мне: {props.state.aboutMe}
+          <DescriptionBlock  fullName = {props.userProfile.fullName} photoLarge = {props.userProfile.photos.large}
+          aboutMe = {props.userProfile.aboutMe}></DescriptionBlock>
         </div>
         <ProfileStatus updateStatus = {props.updateStatus} status={props.status}></ProfileStatus>
       </div>

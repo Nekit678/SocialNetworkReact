@@ -22,9 +22,9 @@ const authSlice = createSlice(
             },
             resetAuth(state, action) {
                 state.email = null
-                state.login = null
-                state.userId = null
-                state.isAuth = false
+                state.login = String(Math.random())
+                // state.userId = null
+                // state.isAuth = false
             }
         }
     }
@@ -54,10 +54,11 @@ export function login(formInfo, setStatus) {
 
 export function logout() {
     return async (dispatch) => {
-        let response = await authAPI.logout()
-        if (!response.resultCode) {
-            dispatch(resetAuth())
-        }
+        // let response = await authAPI.logout()
+        // if (!response.resultCode) {
+        //     dispatch(resetAuth())
+        // }
+        dispatch(resetAuth())
     }
 }
 
