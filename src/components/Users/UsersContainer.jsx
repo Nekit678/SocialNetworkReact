@@ -4,6 +4,7 @@ import { followUser, unfollowUser, getUsers } from "../../redux/reducers/users-r
 import { useEffect } from 'react';
 import Preloader from './../common/Preloader/Preloader';
 import {getUsersPageInfo} from './../../redux/selectors/users-selector';
+import Paginator from './../common/Paginator/Paginator';
 
 
 function UsersContainer(props) {
@@ -29,8 +30,10 @@ function UsersContainer(props) {
 
     return (
         <div>
+            <Paginator totalCount={usersPageInfo.totalUsersCount} pageSize={usersPageInfo.pageSize}
+            currentPage={usersPageInfo.currentPage} onPageChanged={onPageChanged}></Paginator>
             {usersPageInfo.isFetching ? <Preloader></Preloader> : <Users follow={(userId) => follow(userId)} unfollow={(userId) => unfollow(userId)}
-            onPageChanged={onPageChanged} {...usersPageInfo}></Users>}
+            users = {usersPageInfo.users} followingFetching = {usersPageInfo.followingFetching} ></Users>}
         </div>
     )
 }
