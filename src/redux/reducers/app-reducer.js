@@ -20,8 +20,10 @@ const appSlice = createSlice(
 
 export function init() {
     return async (dispatch) => {
-        let responce = await dispatch(getCurrentUser())
-        await dispatch(getProfileInfo(responce.data.id))
+        let response = await dispatch(getCurrentUser())
+        if (!response.resultCode){
+            await dispatch(getProfileInfo(response.data.id))
+        }
         dispatch(setInitializing())
     }
 }

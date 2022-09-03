@@ -32,7 +32,7 @@ function ProfileContainer(props) {
         }
     }
 
-    let postelem = profilePageInfo.dataPosts.map(post => <Post key={post.id} photo={profilePageInfo.userProfile.photos.small} message={post.message} likesCount={post.likesCount}></Post>)
+    let postelem = profilePageInfo.dataPosts.map(post => <Post key={post.id} photo={profilePageInfo.userProfile?profilePageInfo.userProfile.photos.small:""} message={post.message} likesCount={post.likesCount}></Post>)
 
     return (
         <div>
