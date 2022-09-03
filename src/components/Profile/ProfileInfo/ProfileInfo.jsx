@@ -11,8 +11,8 @@ function ProfileInfo(props) {
     return (
       <div>
         <div className={s.descriptionBlock}>
-          <DescriptionBlock  fullName = {props.userProfile.fullName} photoLarge = {props.userProfile.photos.large}
-          aboutMe = {props.userProfile.aboutMe}></DescriptionBlock>
+          <DescriptionBlock  onPhotoSelected={props.onPhotoSelected} fullName = {props.userProfile.fullName} photoLarge = {props.userProfile.photos.large}
+          aboutMe = {props.userProfile.aboutMe} isOwner = {props.isOwner}></DescriptionBlock>
         </div>
         <ProfileStatus updateStatus = {props.updateStatus} status={props.status}></ProfileStatus>
       </div>

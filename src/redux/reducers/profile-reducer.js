@@ -26,6 +26,9 @@ const profileSlice = createSlice(
             },
             setStatus(state, action) {
                 state.status = action.payload
+            },
+            setPhoto(state,action){
+                state.userProfile.photos = action.payload
             }
         }
     }
@@ -58,9 +61,17 @@ export function updateStatus(status) {
 
 }
 
+export function savePhoto(photo) {
+    return async (dispatch) => {
+        let response = await profileAPI.savePhoto(photo)
+        if (!response.resultCode){
+            dispatch(setPhoto(response.data.photos))
+        }
+    }
 
+}
 
-export const { add_post, setUserProfile, setStatus } = profileSlice.actions
+export const { add_post, setUserProfile, setStatus,setPhoto } = profileSlice.actions
 
 export default profileSlice.reducer
 

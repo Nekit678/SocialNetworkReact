@@ -45,11 +45,10 @@ function MyPosts(props) {
 
   return (
     <div className={s.postsBlock}>
-      <h3>My posts</h3>
-      <PostsForm addPost={props.addPost}></PostsForm>
+      <h3>Posts</h3>
+      {props.isOwner?<PostsForm addPost={props.addPost}></PostsForm>:<></>}
       <div className={s.posts}>
         {props.postelem}
-
       </div>
     </div>
   );
