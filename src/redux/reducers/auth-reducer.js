@@ -1,12 +1,13 @@
 
 import { createSlice } from '@reduxjs/toolkit';
-import { authAPI } from '../../api/api';
+import { authAPI, securityAPI } from '../../api/api';
 
 let initialState = {
     userId: null,
     login: null,
     email: null,
-    isAuth: false
+    isAuth: false,
+    captcha: null
 }
 
 const authSlice = createSlice(
@@ -25,6 +26,12 @@ const authSlice = createSlice(
                 state.login = null
                 state.userId = null
                 state.isAuth = false
+            },
+            setCaptcha(state, action) {
+                state.captcha = action.payload;
+            },
+            resetCaptcha(state,action){
+                state.captcha = null
             }
         }
     }
@@ -47,9 +54,13 @@ export function login(formInfo, setStatus) {
         if (!response.resultCode) {
             dispatch(getCurrentUser())
         }
-        else (
+        else {
+            if (response.resultCode === 10) {
+                dispatch(getCaptcha())
+            }
             setStatus(response.messages)
-        )
+        }
+        dispatch(resetCaptcha())
     }
 }
 
@@ -62,5 +73,12 @@ export function logout() {
     }
 }
 
-export const { setAuth, resetAuth } = authSlice.actions
+export function getCaptcha() {
+    return async (dispatch) => {
+        const response = await securityAPI.getCaptcha()
+        dispatch(setCaptcha(response.url))
+    }
+}
+
+export const { setAuth, resetAuth, setCaptcha, resetCaptcha} = authSlice.actions
 export default authSlice.reducer

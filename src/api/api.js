@@ -18,6 +18,13 @@ export const usersAPI = {
     }
 }
 
+export const securityAPI = {
+    async getCaptcha() {
+        let response = await instance.get(`/security/get-captcha-url`)
+        return response.data
+    }
+}
+
 export const followAPI = {
     async follow(userId) {
         let response = await instance.post(`follow/${userId}`);

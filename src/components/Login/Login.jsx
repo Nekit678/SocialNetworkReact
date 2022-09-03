@@ -9,7 +9,7 @@ import { useEffect } from 'react';
 
 function LoginForm(props) {
     return (
-        <Formik initialValues={{ email: '', password: '', rememberMe: false }}
+        <Formik initialValues={{ email: '', password: '', captcha: "", rememberMe: false }}
             validate={values => {
                 const errors = {};
                 if (requiredField(values.email)) { errors.email = requiredField(values.email) }
@@ -21,6 +21,7 @@ function LoginForm(props) {
                 return errors;
             }}
             onSubmit={(values, { setSubmitting, setStatus }) => {
+                console.log(values);
                 props.loginUser(values, setStatus);
                 setSubmitting(false)
             }}>
@@ -30,11 +31,18 @@ function LoginForm(props) {
                         <Field name="email" placeholder={"email"} component={Input} />
                     </div>
                     <div>
-                        <Field name="password" type="password" placeholder={"Password"} component={Input} />
+                        <Field name="password" type="password" placeholder={"password"} component={Input} />
                     </div>
+                    {props.captcha ?
+                        <div>
+                            <img src={props.captcha}></img>
+                            <Field name="captcha" placeholder={"captcha"} component={Input} />
+                        </div> : <></>}
+
                     <div>
                         <Field name="rememberMe" type="checkbox" />Remember me
                     </div>
+
                     <div>
                         <button disabled={isSubmitting} name="LoginButton" type="submit" >Login</button>
                     </div>
@@ -52,17 +60,18 @@ function Login(props) {
     }
 
     const isAuth = useSelector(state => state.auth.isAuth)
+    const captcha = useSelector(state => state.auth.captcha)
     let navigate = useNavigate()
 
     useEffect(() => {
         if (isAuth) {
             navigate("/profile", { replace: true })
         }
-    }, [isAuth,navigate])
+    }, [isAuth, navigate])
 
     return <div>
         <h1>Login</h1>
-        <LoginForm loginUser={loginUser}></LoginForm>
+        <LoginForm captcha={captcha} loginUser={loginUser}></LoginForm>
     </div>
 }
 
