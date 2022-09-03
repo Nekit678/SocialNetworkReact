@@ -62,5 +62,9 @@ export const profileAPI = {
         formData.append("image", photo)
         let response = await instance.put(`profile/photo`, formData, { headers: { 'Content-Type': 'multipart/form-data' } })
         return response.data
-    }
+    },
+    async updateProfile(info) {
+        let response = await instance.put(`profile`, info)
+        return response.data
+    },
 }

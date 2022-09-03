@@ -45,7 +45,9 @@ export function getProfileInfo(userId) {
 export function getUserStatus(userId) {
     return async (dispatch) => {
         let response = await profileAPI.getStatus(userId)
+        if (!response.resultCode){
         dispatch(setStatus(response))
+        }
     }
 
 }
@@ -66,6 +68,16 @@ export function savePhoto(photo) {
         let response = await profileAPI.savePhoto(photo)
         if (!response.resultCode){
             dispatch(setPhoto(response.data.photos))
+        }
+    }
+
+}
+
+export function updateProfile(info) {
+    return async (dispatch) => {
+        let response = await profileAPI.updateProfile(info)
+        if (!response.resultCode){
+            dispatch(getProfileInfo(info.userId))
         }
     }
 

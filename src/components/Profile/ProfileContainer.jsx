@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux/es/exports';
 import { useParams } from "react-router-dom";
-import { add_post, getProfileInfo, getUserStatus, savePhoto, updateStatus } from './../../redux/reducers/profile-reducer';
+import { add_post, getProfileInfo, getUserStatus, savePhoto, updateStatus, updateProfile } from './../../redux/reducers/profile-reducer';
 import withAuthRedirect from './../../hoc/withAuthRedirect';
 import ProfileInfo from './ProfileInfo/ProfileInfo';
 import MyPosts from './MyPosts/MyPosts';
@@ -32,11 +32,11 @@ function ProfileContainer(props) {
         }
     }
 
-    let postelem = profilePageInfo.dataPosts.map(post => <Post key={post.id} message={post.message} likesCount={post.likesCount}></Post>)
+    let postelem = profilePageInfo.dataPosts.map(post => <Post key={post.id} photo={profilePageInfo.userProfile.photos.small} message={post.message} likesCount={post.likesCount}></Post>)
 
     return (
         <div>
-            <ProfileInfo onPhotoSelected={onPhotoSelected} updateStatus={updateUserStatus} status={profilePageInfo.userStatus} userProfile={profilePageInfo.userProfile} isOwner={!params.id}></ProfileInfo>
+            <ProfileInfo updateProfile = {(info) => dispatch(updateProfile(info))} onPhotoSelected={onPhotoSelected} updateStatus={updateUserStatus} status={profilePageInfo.userStatus} userProfile={profilePageInfo.userProfile} isOwner={!params.id}></ProfileInfo>
             <MyPosts isOwner={!params.id} postelem={postelem} addPost={(textPost) => dispatch(add_post(textPost))}></MyPosts>
         </div>
 

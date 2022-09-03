@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { getCurrentUser } from './auth-reducer';
+import { getProfileInfo } from './profile-reducer';
 
 let initialState = {
     initializing: false
@@ -19,7 +20,8 @@ const appSlice = createSlice(
 
 export function init() {
     return async (dispatch) => {
-        await dispatch(getCurrentUser())
+        let responce = await dispatch(getCurrentUser())
+        await dispatch(getProfileInfo(responce.data.id))
         dispatch(setInitializing())
     }
 }

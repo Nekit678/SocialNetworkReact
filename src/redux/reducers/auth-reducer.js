@@ -35,6 +35,7 @@ export function getCurrentUser() {
         let response = await authAPI.getCurrentUser()
         if (!response.resultCode) {
             dispatch(setAuth(response.data))
+            return response
         }
     }
 }

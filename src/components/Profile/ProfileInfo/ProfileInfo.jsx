@@ -11,10 +11,11 @@ function ProfileInfo(props) {
     return (
       <div>
         <div className={s.descriptionBlock}>
-          <DescriptionBlock  onPhotoSelected={props.onPhotoSelected} fullName = {props.userProfile.fullName} photoLarge = {props.userProfile.photos.large}
-          aboutMe = {props.userProfile.aboutMe} isOwner = {props.isOwner}></DescriptionBlock>
+          <DescriptionBlock updateProfile={props.updateProfile} onPhotoSelected={props.onPhotoSelected} isOwner={props.isOwner} {...props.userProfile}></DescriptionBlock>
         </div>
-        <ProfileStatus updateStatus = {props.updateStatus} status={props.status}></ProfileStatus>
+        <div className={s.status}>
+          <ProfileStatus updateStatus={props.updateStatus} status={props.status}></ProfileStatus>
+        </div>
       </div>
     );
   }
