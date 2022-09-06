@@ -1,6 +1,6 @@
 import './App.css';
 import Navbar from './components/Navbar/Navbar';
-import { Route, Routes } from "react-router-dom"
+import { Navigate, Route, Routes } from "react-router-dom"
 import News from './components/News/News';
 import Music from './components/Music/Music';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
@@ -33,6 +33,7 @@ function App(props) {
         <Navbar></Navbar>
         <div className="app-wrapper-content">
           <Routes>
+            <Route path="/" element={<Navigate to="/profile"></Navigate>}/>
             <Route path='/profile' element={<ProfileContainer />} />
             <Route path='/profile/:id' element={<ProfileContainer />} />
             <Route path='/dialogs/*' element={<DialogsContainer />} />
